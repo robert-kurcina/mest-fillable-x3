@@ -19,7 +19,7 @@ MEST.functions.js
 As a last action, insert this invocation on mouse-up:
 `runInitialize();`
 
-![alt text](add-javascript.png "Add JavaScript on Mouse Up event")
+![alt text](img/add-javascript.png "Add JavaScript on Mouse Up event")
 
 ### BUILD
 As an action, insert this invocation on mouse-up:
