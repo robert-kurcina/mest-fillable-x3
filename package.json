@@ -1,0 +1,15 @@
+{
+  "name": "mest-fillable-x3",
+  "version": "1.0.0",
+  "description": "This code drives the interactive features of `8.5x11.character.template-fillable-x3`",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "merge-files": "^0.1.2"
+  }
+}
