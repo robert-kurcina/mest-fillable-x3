@@ -30,57 +30,66 @@ MASTER_MENU.ATTRIBUTES = {
       "description": "Close Combat Ability",
       "BP": 5,
       "CR": 0,
-      "condition": "="
+      "condition": "=",
+      "index": 0
    },
    "RCA": {
       "description": "Range Combat Ability",
       "BP": 3,
       "CR": 0,
-      "condition": "="
+      "condition": "=",
+      "index": 1
    },
    "REF": {
       "description": "Reflexes",
       "BP": 3,
       "CR": 0.1,
-      "condition": "="
+      "condition": "=",
+      "index": 2
    },
    "INT": {
       "description": "Intellect",
       "BP": 6,
       "CR": 0.1,
-      "condition": ">"
+      "condition": ">",
+      "index": 3
    },
    "POW": {
       "description": "Willpower",
       "BP": 4,
       "CR": 0.1,
-      "condition": "<"
+      "condition": "<",
+      "index": 4
    },
    "STR": {
       "description": "Strength",
       "BP": 5,
       "CR": 0,
-      "condition": "="
+      "condition": "=",
+      "index": 5
    },
    "FOR": {
       "description": "Fortitude",
       "BP": 6,
       "CR": 0.1,
-      "condition": ">"
+      "condition": ">",
+      "index": 6
    },
    "MOV": {
       "description": "Movement Ability",
       "BP": 4,
       "CR": 0.1,
-      "condition": ">"
+      "condition": ">",
+      "index": 7
    },
    "SIZ": {
       "description": "Physical Mass",
       "BP": 5,
       "CR": 0,
-      "condition": "="
+      "condition": "=",
+      "index": 8
    }
-};
+}
 
 MASTER_MENU.ARCHETYPES = {
    "Average": {
@@ -113,7 +122,7 @@ MASTER_MENU.ARCHETYPES = {
       "iCR" : 0,
       "traits": []
    }
-};
+}
 
 MASTER_MENU.VARIANTS = {
    "_none": {
@@ -252,7 +261,7 @@ MASTER_MENU.VARIANTS = {
       "traits": ["Leadership"],
       "termPriority": 1800
    }
-};
+}
 
 MASTER_MENU.WEAPONS = {
    "_none": {
@@ -625,7 +634,7 @@ MASTER_MENU.WEAPONS = {
       "traits": ".",
       "BP": 53
    }
-};
+}
 
 MASTER_MENU.ARMORS = {
    "_none": {
@@ -700,4 +709,4 @@ MASTER_MENU.ARMORS = {
       "traits": "[Laden 3][Lumbering]. Deflect.",
       "BP": 15
    }
-};
+}

@@ -6,6 +6,7 @@ var BURDEN_FIELDS = ["cb_cca", "cb_ref", "cb_mov"];
 var PHYSICALITY_FIELDS = ["STR", "SIZ"];
 var BP_TOTAL_FIELD = "BPTotal";
 var GLOBAL_DELIMITER = "_";
+var PROFILE_KEY = "profile";
 var MENU_NAME_ERROR = "ERROR";
 var MENU_DEFAULT_NONE = "_none";
 var MENU_REFERENCES_BY_FOO = {
@@ -14,7 +15,7 @@ var MENU_REFERENCES_BY_FOO = {
    "weapon": "WEAPONS",
    "armor": "ARMORS",
    "species": "SPECIES"
-};
+}
 
 var MENU_DEFAULT_BY_NAME = {
    "ARCHETYPES": "Average",
@@ -22,7 +23,15 @@ var MENU_DEFAULT_BY_NAME = {
    "WEAPONS": MENU_DEFAULT_NONE,
    "ARMORS": MENU_DEFAULT_NONE,
    "SPECIES": "Human"
-};
+}
+
+var BUILD_TARGETS_BY_NAME = {
+   "ARCHETYPES": ["text_archetype"],
+   "VARIANTS": ["text_variant_1", "text_variant_2"],
+   "WEAPONS": ["text_weapon_1", "text_weapon_2", "text_weapon_3", "text_weapon_4"],
+   "ARMORS": ["text_armor_1", "text_armor_2", "text_armor_3", "text_armor_4"],
+   "SPECIES": ["text_species"]
+}
 
 var TRAITS_FIELDS = [
     "Traits",
@@ -79,5 +88,5 @@ var TOGGLE_STATUS = {
    "hidden": 1,
    "noPrint": 2,
    "noView": 3
-};
+}
 

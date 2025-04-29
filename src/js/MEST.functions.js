@@ -12,7 +12,7 @@ function calcBPTotal(bpFields, suffix){
    }
 
    return sum || 0;
-};
+}
 
 function driveBPSum(suffix){
    var key = BP_TOTAL_FIELD + suffix;
@@ -20,7 +20,7 @@ function driveBPSum(suffix){
    var bpTotal = calcBPTotal(BP_SUBFIELDS, suffix);
 
    field.value = bpTotal;
-};
+}
 
 function getHighest(fieldSet, suffix){
    var highest = -1000;
@@ -36,7 +36,7 @@ function getHighest(fieldSet, suffix){
    }
 
    return highest || 0;
-};
+}
 
 function extractValue(str, searchStr){
     if (! (str && searchStr)){ return 0; }
@@ -58,7 +58,7 @@ function extractValue(str, searchStr){
     }
 
     return 1*found || 0;
-};
+}
 
 function extractTraitLevel(traitFields, searchStr, suffix){
     var sum = 0;
@@ -73,7 +73,7 @@ function extractTraitLevel(traitFields, searchStr, suffix){
     }
 
     return sum || 0;
-};
+}
 
 function resetChecks(fieldSet, suffix){
    for (var j = 0; j < fieldSet.length; j++){
@@ -88,7 +88,7 @@ function resetChecks(fieldSet, suffix){
          }
       }
    }
-};
+}
 
 function setChecks(fieldSet, threshold, suffix){
    for (var j = 0; j < fieldSet.length; j++){
@@ -103,7 +103,7 @@ function setChecks(fieldSet, threshold, suffix){
          }
       }
    }
-};
+}
 
 function driveBurden(suffix){
    var physicality = getHighest(PHYSICALITY_FIELDS, suffix);
@@ -115,7 +115,7 @@ function driveBurden(suffix){
    if (burden > 0){ 
       setChecks(BURDEN_FIELDS, burden - 1, suffix);
    }
-};
+}
 
 /**
  * INVOKED by each Profile Configuration button
@@ -134,7 +134,7 @@ function getSuffix(buttonName){
    var numItems = list.length;
  
    return GLOBAL_DELIMITER + list[numItems - 1];
-};
+}
 
 function getFoo(buttonName){
    if (!buttonName){ return; }
@@ -144,7 +144,7 @@ function getFoo(buttonName){
    list.pop();
 
    return list.join(GLOBAL_DELIMITER);
-};
+}
 
 function getTextField(fooText, suffix){
    if (!fooText){ return {}; }
@@ -153,7 +153,7 @@ function getTextField(fooText, suffix){
    var field = this.getField(key) || {};
 
    return field;
-};
+}
 
 function getMenuName(fooText){
    if (!fooText){ return {}; }
@@ -162,7 +162,7 @@ function getMenuName(fooText){
    var menuName = MENU_REFERENCES_BY_FOO[rootFoo] || MENU_NAME_ERROR;
 
    return menuName;
-};
+}
 
 function getMenuEntriesHash(menuName){
    if (!menuName){ return {}; }
@@ -170,7 +170,7 @@ function getMenuEntriesHash(menuName){
    var entriesHash = MASTER_MENU[menuName] || {};
 
    return entriesHash;
-};
+}
 
 function getMenuItems(menuName, entriesList){
    if (!menuName){ return []; }
@@ -180,7 +180,7 @@ function getMenuItems(menuName, entriesList){
    result.unshift(firstItem);
  
    return result;
-};
+}
 
 function getMenuDefaultValue(menuName){
    if (!menuName){ return MENU_DEFAULT_NONE; }
@@ -188,7 +188,7 @@ function getMenuDefaultValue(menuName){
    var result = MENU_DEFAULT_BY_NAME[menuName];
 
    return result;
-};
+}
 
 /**
  * INVOKED by each Configuration button
@@ -208,7 +208,7 @@ function displayMenuSetText(buttonName){
    var choice = app.popUpMenu(menuItems) || defaultValue;
 
    field.value = choice;
-};
+}
 
  /**
   * TOGGLE the control, field, or button to one of the enumerated TOGGLE_STATUS values
@@ -225,7 +225,7 @@ function displayMenuSetText(buttonName){
 
       field.display = toggleState;
    }
-};
+}
 
 function toggleSets(toggleState, suffixes){
    toggleVisibility(BUTTON_LIST, toggleState);
@@ -236,15 +236,15 @@ function toggleSets(toggleState, suffixes){
       toggleVisibility(CONTROL_LIST, toggleState, suffix);
       toggleVisibility(TEXT_LIST, toggleState, suffix);
    }
-};
+}
 
 function hideEverything(){
    toggleSets(TOGGLE_STATUS.hidden, SUFFIX_LIST);
-};
+}
 
 function showEverything(){
    toggleSets(TOGGLE_STATUS.noPrint, SUFFIX_LIST);
-};
+}
 
 function performCalculations(suffixes){   
    for (var i = 0; i < suffixes.length; i++){
@@ -253,27 +253,98 @@ function performCalculations(suffixes){
       driveBPSum(suffix);
       driveBurden(suffix);
    }          
-};
+}
 
-function performBuild(suffixes){
-   ;
-};
+function initializeGlobal(){
+   _global = {};
+}
+
+function getProfileKey(suffix){
+   var profileKey = PROFILE_KEY + suffix;
+   return profileKey;
+}
+
+function getProfileHash(suffix){
+   var profileKey = getProfileKey(suffix);
+   var profileHash = _global[profileKey];
+
+   if (!profileHash){
+      profileHash = initializeProfile(suffix);
+   }
+
+   return profileHash;
+}
+
+function initializeProfile(suffix){
+   var profileKey = getProfileKey(suffix);
+
+   _global[profileKey] = {
+      "attrList": [2,2,2,2,2,2,2,2,3],
+      "dBPList": [],
+      "iCRrList": []
+   };
+
+   var pHash = _global[profileId];
+   return pHash;
+}
+
+function assignConfiguration(menuSetName, suffix){
+   if (!menuSetName){ return; }
+
+   var profileHash = getProfileHash(suffix);
+   profileHash[menuSetName] = [];
+
+   var dataSet = MASTER_MENU[menuSetName];
+   var defaulSetName = MENU_DEFAULT_BY_NAME[menuSetName];
+   var textFieldKeys = BUILD_TARGETS_BY_NAME[menuSetName] || [];
+   var numKeys = textFieldKeys.length;
+
+   for (var i = 0; i < numKeys; i++){
+      var key = textFieldKeys[i] + suffix;
+      var textField = this.getField(key) || {};
+      var val = textField.value;
+      var config = dataSet[val] || dataSet[defaulSetName] || {};
+      config[menuSetName] = config;
+      profileHash[menuSetName].push(config);
+   }
+}
+
+function assignConfigurations(buildTargetHash, suffix){
+   if (!buildTargetHash){ return; }
+
+   var targetKeys = Object.keys(buildTargetHash);
+   for (var j = 0; j < targetKeys; j++){
+      var targetKey = targetKeys[j];
+
+      assignConfiguration(targetKey, suffix);
+   }
+}
+
+function performBuild(buildTargetHash, suffixes){
+   for (var i = 0; i < suffixes.length; i++){
+      var suffix = suffixes[i];
+
+      assignConfigurations(buildTargetHash, suffix);
+   }   
+}
 
 function runReset(){
    hideEverything();
-};
+   initializeGlobal();
+}
 
 function runCalculate(){
    performCalculations(SUFFIX_LIST);
-};
+}
 
 function runBuild(){
-   performBuild(SUFFIX_LIST);
-};
+   performBuild(BUILD_TARGETS_BY_NAME, SUFFIX_LIST);
+}
 
 function runInitialize(){
    showEverything();
-};
+   initializeGlobal();
+}
 
 //runInitialize(); invoke at end of INITIALIZE button
 //runBuild(); invoke via BUILD button
