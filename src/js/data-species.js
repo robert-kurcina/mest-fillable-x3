@@ -1,0 +1,24 @@
+//data-species.js
+
+var MASTER_MENU = MASTER_MENU || {};
+
+MASTER_MENU.SPECIES = {
+   "Ethonik": {
+      "attr": [3,1,2,1,3,2,3,2,3],
+      "dBP": 39,
+      "iCR" : 0.0,
+      "traits": ["[Solitary]. Brawn."]
+   },
+   "Human": {
+      "attr": [2,2,2,2,2,2,2,2,3],
+      "dBP": 30,
+      "iCR" : 0,
+      "traits": []
+   },
+   "Logican": {
+      "attr": [1,1,2,3,3,2,2,2,3],
+      "dBP": 37,
+      "iCR" : 0.2,
+      "traits": ["Leadership"]
+   },
+}

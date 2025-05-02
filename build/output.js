@@ -1,4 +1,181 @@
-//data-controls.js
+//data-archetypes.js
+var MASTER_MENU = MASTER_MENU || {};
+
+MASTER_MENU.ARCHETYPES = {
+   "Average": {
+      "attr": [0,0,0,0,0,0,0,0,0],
+      "dBP": 0,
+      "iCR" : 0,
+      "traits": []
+   },
+   "Elite": {
+      "attr": [1,1,1,1,1,1,1,1,0],
+      "dBP": 0,
+      "iCR" : 0,
+      "traits": []
+   },
+   "Militia": {
+      "attr": [0,0,0,0,0,0,0,0,0],
+      "dBP": 0,
+      "iCR" : 0,
+      "traits": []
+   },
+   "Untrained": {
+      "attr": [0,0,0,0,0,0,0,0,0],
+      "dBP": 0,
+      "iCR" : 0,
+      "traits": []
+   },
+   "Veteran": {
+      "attr": [0,0,0,0,0,0,0,0,0],
+      "dBP": 0,
+      "iCR" : 0,
+      "traits": []
+   }
+}//data-armors.js
+var MASTER_MENU = MASTER_MENU || {};
+
+MASTER_MENU.ARMORS = {
+   "_none": {
+      "label": ".",
+      "Type": "None",
+      "AR": 0,
+      "Deflect": 0,
+      "traits": "",
+      "BP": 0
+   },
+   "Helmet": {
+      "label": "Helmet",
+      "Type": "Helm",
+      "AR": 0,
+      "Deflect": 0,
+      "traits": "Protective.",
+      "BP": 3
+   },
+   "Helmet, Full": {
+      "label": "Full Helm",
+      "Type": "Helm",
+      "AR": 1,
+      "Deflect": 0,
+      "traits": "[Blinders]. Protective.",
+      "BP": 5
+   },
+   "Shield, Small": {
+      "label": "Small Shield",
+      "Type": "Shield",
+      "AR": 0,
+      "Deflect": 1,
+      "traits": "[1H]. Coverage. Deflect.",
+      "BP": 8
+   },
+   "Shield, Medium": {
+      "label": "Shield",
+      "Type": "Shield",
+      "AR": 1,
+      "Deflect": 1,
+      "traits": "[1H][Laden]. Coverage. Deflect.",
+      "BP": 10
+   },
+   "Armored Gear": {
+      "label": "Armored Gear",
+      "Type": "Gear",
+      "AR": 0,
+      "Deflect": 1,
+      "traits": "Deflect. Conceal.",
+      "BP": 5
+   },
+   "Armor, Light": {
+      "label": "Light Armor",
+      "Type": "Suit",
+      "AR": 2,
+      "Deflect": 1,
+      "traits": "[Laden]. Deflect. ",
+      "BP": 8
+   },
+   "Armor, Medium": {
+      "label": "Medium Armor",
+      "Type": "Suit",
+      "AR": 4,
+      "Deflect": 1,
+      "traits": "[Laden 2]. Deflect. ",
+      "BP": 13
+   },
+   "Armor, Heavy": {
+      "label": "Heavy Armor",
+      "Type": "Suit",
+      "AR": 6,
+      "Deflect": 1,
+      "traits": "[Laden 3][Lumbering]. Deflect.",
+      "BP": 15
+   }
+}//data-attributes.js
+var MASTER_MENU = MASTER_MENU || {};
+
+MASTER_MENU.ATTRIBUTES = {
+   "CCA": {
+      "description": "Close Combat Ability",
+      "BP": 5,
+      "CR": 0,
+      "condition": "=",
+      "index": 0
+   },
+   "RCA": {
+      "description": "Range Combat Ability",
+      "BP": 3,
+      "CR": 0,
+      "condition": "=",
+      "index": 1
+   },
+   "REF": {
+      "description": "Reflexes",
+      "BP": 3,
+      "CR": 0.1,
+      "condition": "=",
+      "index": 2
+   },
+   "INT": {
+      "description": "Intellect",
+      "BP": 6,
+      "CR": 0.1,
+      "condition": ">",
+      "index": 3
+   },
+   "POW": {
+      "description": "Willpower",
+      "BP": 4,
+      "CR": 0.1,
+      "condition": "<",
+      "index": 4
+   },
+   "STR": {
+      "description": "Strength",
+      "BP": 5,
+      "CR": 0,
+      "condition": "=",
+      "index": 5
+   },
+   "FOR": {
+      "description": "Fortitude",
+      "BP": 6,
+      "CR": 0.1,
+      "condition": ">",
+      "index": 6
+   },
+   "MOV": {
+      "description": "Movement Ability",
+      "BP": 4,
+      "CR": 0.1,
+      "condition": ">",
+      "index": 7
+   },
+   "SIZ": {
+      "description": "Physical Mass",
+      "BP": 5,
+      "CR": 0,
+      "condition": "=",
+      "index": 8
+   }
+}//data-controls.js
 
 var SUFFIX_LIST = ["_a", "_b", "_c"];
 var BP_SUBFIELDS = ["fBP", "BP_1", "BP_2", "BP_3", "BP_4", "BP_item_1", "BP_item_2"];
@@ -90,11 +267,13 @@ var TOGGLE_STATUS = {
    "noView": 3
 }
 
-//data-fillable-items.js
+//data-equipment.js
+
+//data-globals
 
 var ADJUST_AVERAGE = -57;
-var AVERAGE_ATTR = 2;
-var MASTER_MENU = {};
+var AVERAGE_ATTR = 2;//data-species.js
+var MASTER_MENU = MASTER_MENU || {};
 
 MASTER_MENU.SPECIES = {
    "Ethonik": {
@@ -115,106 +294,7 @@ MASTER_MENU.SPECIES = {
       "iCR" : 0.2,
       "traits": ["Leadership"]
    },
-}
-
-MASTER_MENU.ATTRIBUTES = {
-   "CCA": {
-      "description": "Close Combat Ability",
-      "BP": 5,
-      "CR": 0,
-      "condition": "=",
-      "index": 0
-   },
-   "RCA": {
-      "description": "Range Combat Ability",
-      "BP": 3,
-      "CR": 0,
-      "condition": "=",
-      "index": 1
-   },
-   "REF": {
-      "description": "Reflexes",
-      "BP": 3,
-      "CR": 0.1,
-      "condition": "=",
-      "index": 2
-   },
-   "INT": {
-      "description": "Intellect",
-      "BP": 6,
-      "CR": 0.1,
-      "condition": ">",
-      "index": 3
-   },
-   "POW": {
-      "description": "Willpower",
-      "BP": 4,
-      "CR": 0.1,
-      "condition": "<",
-      "index": 4
-   },
-   "STR": {
-      "description": "Strength",
-      "BP": 5,
-      "CR": 0,
-      "condition": "=",
-      "index": 5
-   },
-   "FOR": {
-      "description": "Fortitude",
-      "BP": 6,
-      "CR": 0.1,
-      "condition": ">",
-      "index": 6
-   },
-   "MOV": {
-      "description": "Movement Ability",
-      "BP": 4,
-      "CR": 0.1,
-      "condition": ">",
-      "index": 7
-   },
-   "SIZ": {
-      "description": "Physical Mass",
-      "BP": 5,
-      "CR": 0,
-      "condition": "=",
-      "index": 8
-   }
-}
-
-MASTER_MENU.ARCHETYPES = {
-   "Average": {
-      "attr": [0,0,0,0,0,0,0,0,0],
-      "dBP": 0,
-      "iCR" : 0,
-      "traits": []
-   },
-   "Elite": {
-      "attr": [1,1,1,1,1,1,1,1,0],
-      "dBP": 0,
-      "iCR" : 0,
-      "traits": []
-   },
-   "Militia": {
-      "attr": [0,0,0,0,0,0,0,0,0],
-      "dBP": 0,
-      "iCR" : 0,
-      "traits": []
-   },
-   "Untrained": {
-      "attr": [0,0,0,0,0,0,0,0,0],
-      "dBP": 0,
-      "iCR" : 0,
-      "traits": []
-   },
-   "Veteran": {
-      "attr": [0,0,0,0,0,0,0,0,0],
-      "dBP": 0,
-      "iCR" : 0,
-      "traits": []
-   }
-}
+}var MASTER_MENU = MASTER_MENU || {};
 
 MASTER_MENU.VARIANTS = {
    "_none": {
@@ -354,6 +434,8 @@ MASTER_MENU.VARIANTS = {
       "termPriority": 1800
    }
 }
+//data-weapons.js
+var MASTER_MENU = MASTER_MENU || {};
 
 MASTER_MENU.WEAPONS = {
    "_none": {
@@ -726,81 +808,6 @@ MASTER_MENU.WEAPONS = {
       "traits": ".",
       "BP": 53
    }
-}
-
-MASTER_MENU.ARMORS = {
-   "_none": {
-      "label": ".",
-      "Type": "None",
-      "AR": 0,
-      "Deflect": 0,
-      "traits": "",
-      "BP": 0
-   },
-   "Helmet": {
-      "label": "Helmet",
-      "Type": "Helm",
-      "AR": 0,
-      "Deflect": 0,
-      "traits": "Protective.",
-      "BP": 3
-   },
-   "Helmet, Full": {
-      "label": "Full Helm",
-      "Type": "Helm",
-      "AR": 1,
-      "Deflect": 0,
-      "traits": "[Blinders]. Protective.",
-      "BP": 5
-   },
-   "Shield, Small": {
-      "label": "Small Shield",
-      "Type": "Shield",
-      "AR": 0,
-      "Deflect": 1,
-      "traits": "[1H]. Coverage. Deflect.",
-      "BP": 8
-   },
-   "Shield, Medium": {
-      "label": "Shield",
-      "Type": "Shield",
-      "AR": 1,
-      "Deflect": 1,
-      "traits": "[1H][Laden]. Coverage. Deflect.",
-      "BP": 10
-   },
-   "Armored Gear": {
-      "label": "Armored Gear",
-      "Type": "Gear",
-      "AR": 0,
-      "Deflect": 1,
-      "traits": "Deflect. Conceal.",
-      "BP": 5
-   },
-   "Armor, Light": {
-      "label": "Light Armor",
-      "Type": "Suit",
-      "AR": 2,
-      "Deflect": 1,
-      "traits": "[Laden]. Deflect. ",
-      "BP": 8
-   },
-   "Armor, Medium": {
-      "label": "Medium Armor",
-      "Type": "Suit",
-      "AR": 4,
-      "Deflect": 1,
-      "traits": "[Laden 2]. Deflect. ",
-      "BP": 13
-   },
-   "Armor, Heavy": {
-      "label": "Heavy Armor",
-      "Type": "Suit",
-      "AR": 6,
-      "Deflect": 1,
-      "traits": "[Laden 3][Lumbering]. Deflect.",
-      "BP": 15
-   }
 }//functions-prepare.js
 
 function runReset(){
@@ -830,7 +837,50 @@ function runInitialize(){
    showEverything();
    initializeGlobal();
    prepareForm();
-}//functions-calculate.js
+}//functions-build.js
+
+
+
+function assignConfiguration(menuSetName, suffix){
+    if (!menuSetName){ return; }
+ 
+    var profileHash = getProfileHash(suffix);
+    profileHash[menuSetName] = [];
+ 
+    var dataSet = MASTER_MENU[menuSetName];
+    var defaulSetName = MENU_DEFAULT_BY_NAME[menuSetName];
+    var textFieldKeys = BUILD_TARGETS_BY_NAME[menuSetName] || [];
+    var numKeys = textFieldKeys.length;
+ 
+    for (var i = 0; i < numKeys; i++){
+       var key = textFieldKeys[i] + suffix;
+       var textField = this.getField(key) || {};
+       var val = textField.value;
+       var config = dataSet[val] || dataSet[defaulSetName] || {};
+       config[menuSetName] = config;
+       profileHash[menuSetName].push(config);
+    }
+ }
+ 
+ function assignConfigurations(buildTargetHash, suffix){
+    if (!buildTargetHash){ return; }
+ 
+    var targetKeys = Object.keys(buildTargetHash);
+    for (var j = 0; j < targetKeys; j++){
+       var targetKey = targetKeys[j];
+ 
+       assignConfiguration(targetKey, suffix);
+    }
+ }
+ 
+ function performBuild(buildTargetHash, suffixes){
+    console.println("INVOKED performBuild");
+    for (var i = 0; i < suffixes.length; i++){
+       var suffix = suffixes[i];
+ 
+       assignConfigurations(buildTargetHash, suffix);
+    }   
+ }//functions-calculate.js
 
 function getHighest(fieldSet, suffix){
     var highest = -1000;
@@ -957,6 +1007,61 @@ function performCalculations(suffixes){
        driveBPSum(suffix);
        driveBurden(suffix);
     }          
+ }//functions-menu.js
+
+function getMenuName(fooText){
+    if (!fooText){ return {}; }
+ 
+    var rootFoo = fooText.split(GLOBAL_DELIMITER)[0];
+    var menuName = MENU_REFERENCES_BY_FOO[rootFoo] || MENU_NAME_ERROR;
+ 
+    return menuName;
+ }
+ 
+ function getMenuEntriesHash(menuName){
+    if (!menuName){ return {}; }
+ 
+    var entriesHash = MASTER_MENU[menuName] || {};
+ 
+    return entriesHash;
+ }
+ 
+ function getMenuItems(menuName, entriesList){
+    if (!menuName){ return []; }
+ 
+    var firstItem = "Choose [ " + menuName + " ]";
+    var result = entriesList;
+    result.unshift(firstItem);
+  
+    return result;
+ }
+ 
+ function getMenuDefaultValue(menuName){
+    if (!menuName){ return MENU_DEFAULT_NONE; }
+ 
+    var result = MENU_DEFAULT_BY_NAME[menuName];
+ 
+    return result;
+ }
+ 
+ /**
+  * INVOKED by each Configuration button
+  * via displayMenuSetText(event.target.name);
+  */
+ function displayMenuSetText(buttonName){
+    if (!buttonName){ return []; }
+ 
+    var suffix = getSuffix(buttonName);
+    var fooText = getFoo(buttonName);
+    var menuName = getMenuName(fooText);
+    var entriesHash = getMenuEntriesHash(menuName);
+    var entriesList = Object.keys(entriesHash);
+    var field = getTextField(fooText, suffix);
+    var menuItems = getMenuItems(menuName, entriesList);
+    var defaultValue = getMenuDefaultValue(menuName);
+    var choice = app.popUpMenu(menuItems) || defaultValue;
+ 
+    field.value = choice;
  }//functions-polyfills.js
 
 /**
@@ -1074,61 +1179,6 @@ function getTextField(fooText, suffix){
    return field;
 }
 
-function getMenuName(fooText){
-   if (!fooText){ return {}; }
-
-   var rootFoo = fooText.split(GLOBAL_DELIMITER)[0];
-   var menuName = MENU_REFERENCES_BY_FOO[rootFoo] || MENU_NAME_ERROR;
-
-   return menuName;
-}
-
-function getMenuEntriesHash(menuName){
-   if (!menuName){ return {}; }
-
-   var entriesHash = MASTER_MENU[menuName] || {};
-
-   return entriesHash;
-}
-
-function getMenuItems(menuName, entriesList){
-   if (!menuName){ return []; }
-
-   var firstItem = "Choose [ " + menuName + " ]";
-   var result = entriesList;
-   result.unshift(firstItem);
- 
-   return result;
-}
-
-function getMenuDefaultValue(menuName){
-   if (!menuName){ return MENU_DEFAULT_NONE; }
-
-   var result = MENU_DEFAULT_BY_NAME[menuName];
-
-   return result;
-}
-
-/**
- * INVOKED by each Configuration button
- * via displayMenuSetText(event.target.name);
- */
-function displayMenuSetText(buttonName){
-   if (!buttonName){ return []; }
-
-   var suffix = getSuffix(buttonName);
-   var fooText = getFoo(buttonName);
-   var menuName = getMenuName(fooText);
-   var entriesHash = getMenuEntriesHash(menuName);
-   var entriesList = Object.keys(entriesHash);
-   var field = getTextField(fooText, suffix);
-   var menuItems = getMenuItems(menuName, entriesList);
-   var defaultValue = getMenuDefaultValue(menuName);
-   var choice = app.popUpMenu(menuItems) || defaultValue;
-
-   field.value = choice;
-}
-
  /**
   * TOGGLE the control, field, or button to one of the enumerated TOGGLE_STATUS values
   * -- givenList is one of either BUTTON_LIST or CONTROL_LIST
@@ -1196,46 +1246,6 @@ function initializeProfile(suffix){
 
    var pHash = _global[profileId];
    return pHash;
-}
-
-function assignConfiguration(menuSetName, suffix){
-   if (!menuSetName){ return; }
-
-   var profileHash = getProfileHash(suffix);
-   profileHash[menuSetName] = [];
-
-   var dataSet = MASTER_MENU[menuSetName];
-   var defaulSetName = MENU_DEFAULT_BY_NAME[menuSetName];
-   var textFieldKeys = BUILD_TARGETS_BY_NAME[menuSetName] || [];
-   var numKeys = textFieldKeys.length;
-
-   for (var i = 0; i < numKeys; i++){
-      var key = textFieldKeys[i] + suffix;
-      var textField = this.getField(key) || {};
-      var val = textField.value;
-      var config = dataSet[val] || dataSet[defaulSetName] || {};
-      config[menuSetName] = config;
-      profileHash[menuSetName].push(config);
-   }
-}
-
-function assignConfigurations(buildTargetHash, suffix){
-   if (!buildTargetHash){ return; }
-
-   var targetKeys = Object.keys(buildTargetHash);
-   for (var j = 0; j < targetKeys; j++){
-      var targetKey = targetKeys[j];
-
-      assignConfiguration(targetKey, suffix);
-   }
-}
-
-function performBuild(buildTargetHash, suffixes){
-   for (var i = 0; i < suffixes.length; i++){
-      var suffix = suffixes[i];
-
-      assignConfigurations(buildTargetHash, suffix);
-   }   
 }
 
 

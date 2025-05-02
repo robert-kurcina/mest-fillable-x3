@@ -38,61 +38,6 @@ function getTextField(fooText, suffix){
    return field;
 }
 
-function getMenuName(fooText){
-   if (!fooText){ return {}; }
-
-   var rootFoo = fooText.split(GLOBAL_DELIMITER)[0];
-   var menuName = MENU_REFERENCES_BY_FOO[rootFoo] || MENU_NAME_ERROR;
-
-   return menuName;
-}
-
-function getMenuEntriesHash(menuName){
-   if (!menuName){ return {}; }
-
-   var entriesHash = MASTER_MENU[menuName] || {};
-
-   return entriesHash;
-}
-
-function getMenuItems(menuName, entriesList){
-   if (!menuName){ return []; }
-
-   var firstItem = "Choose [ " + menuName + " ]";
-   var result = entriesList;
-   result.unshift(firstItem);
- 
-   return result;
-}
-
-function getMenuDefaultValue(menuName){
-   if (!menuName){ return MENU_DEFAULT_NONE; }
-
-   var result = MENU_DEFAULT_BY_NAME[menuName];
-
-   return result;
-}
-
-/**
- * INVOKED by each Configuration button
- * via displayMenuSetText(event.target.name);
- */
-function displayMenuSetText(buttonName){
-   if (!buttonName){ return []; }
-
-   var suffix = getSuffix(buttonName);
-   var fooText = getFoo(buttonName);
-   var menuName = getMenuName(fooText);
-   var entriesHash = getMenuEntriesHash(menuName);
-   var entriesList = Object.keys(entriesHash);
-   var field = getTextField(fooText, suffix);
-   var menuItems = getMenuItems(menuName, entriesList);
-   var defaultValue = getMenuDefaultValue(menuName);
-   var choice = app.popUpMenu(menuItems) || defaultValue;
-
-   field.value = choice;
-}
-
  /**
   * TOGGLE the control, field, or button to one of the enumerated TOGGLE_STATUS values
   * -- givenList is one of either BUTTON_LIST or CONTROL_LIST
@@ -160,46 +105,6 @@ function initializeProfile(suffix){
 
    var pHash = _global[profileId];
    return pHash;
-}
-
-function assignConfiguration(menuSetName, suffix){
-   if (!menuSetName){ return; }
-
-   var profileHash = getProfileHash(suffix);
-   profileHash[menuSetName] = [];
-
-   var dataSet = MASTER_MENU[menuSetName];
-   var defaulSetName = MENU_DEFAULT_BY_NAME[menuSetName];
-   var textFieldKeys = BUILD_TARGETS_BY_NAME[menuSetName] || [];
-   var numKeys = textFieldKeys.length;
-
-   for (var i = 0; i < numKeys; i++){
-      var key = textFieldKeys[i] + suffix;
-      var textField = this.getField(key) || {};
-      var val = textField.value;
-      var config = dataSet[val] || dataSet[defaulSetName] || {};
-      config[menuSetName] = config;
-      profileHash[menuSetName].push(config);
-   }
-}
-
-function assignConfigurations(buildTargetHash, suffix){
-   if (!buildTargetHash){ return; }
-
-   var targetKeys = Object.keys(buildTargetHash);
-   for (var j = 0; j < targetKeys; j++){
-      var targetKey = targetKeys[j];
-
-      assignConfiguration(targetKey, suffix);
-   }
-}
-
-function performBuild(buildTargetHash, suffixes){
-   for (var i = 0; i < suffixes.length; i++){
-      var suffix = suffixes[i];
-
-      assignConfigurations(buildTargetHash, suffix);
-   }   
 }
 
 

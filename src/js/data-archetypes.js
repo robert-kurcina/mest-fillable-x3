@@ -1,0 +1,36 @@
+//data-archetypes.js
+
+var MASTER_MENU = MASTER_MENU || {};
+
+MASTER_MENU.ARCHETYPES = {
+   "Average": {
+      "attr": [0,0,0,0,0,0,0,0,0],
+      "dBP": 0,
+      "iCR" : 0,
+      "traits": []
+   },
+   "Elite": {
+      "attr": [1,1,1,1,1,1,1,1,0],
+      "dBP": 0,
+      "iCR" : 0,
+      "traits": []
+   },
+   "Militia": {
+      "attr": [0,0,0,0,0,0,0,0,0],
+      "dBP": 0,
+      "iCR" : 0,
+      "traits": []
+   },
+   "Untrained": {
+      "attr": [0,0,0,0,0,0,0,0,0],
+      "dBP": 0,
+      "iCR" : 0,
+      "traits": []
+   },
+   "Veteran": {
+      "attr": [0,0,0,0,0,0,0,0,0],
+      "dBP": 0,
+      "iCR" : 0,
+      "traits": []
+   }
+}

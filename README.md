@@ -1,39 +1,28 @@
 # MEST.fillable
 This code drives the interactive features of `8.5x11.character.template-fillable-x3`
 
+1. All code is written in separate files within //src/js
+2. Ensure every file has a blank-line before any non-comments otherwise they'll be joined incorrectly.
+3. Be aware that JavaScript for PDF doesn't use `console.log` for debug logging but instead uses `console.println `
+4. After updating `//src/js`, combine them into `//build/output.js` by using `npm run combine` from the **git-bash** terminal
+
 ## Insert Code
 When creating a new interactive PDF, the code from these files must be inserted. All of the controls need to be prepared with the JavaScript code available in this repo as follows:
 
 ## Command Buttons
 Each of these affect processing of information for the entire interface.
+* Initialize
+* Build
+* Calculate
+* Reset
 
 ### Initialize
-Insert the code in this order
-
-```
-MEST.data-fillable-items.js
-MEST.data-controls.js
-MEST.acrojs-polyfills.js
-MEST.functions.js
-```
-As a last action, insert this invocation on mouse-up:
-`runInitialize();`
+1. Insert the code from `//build/output.js` as an Action for MouseUp > JavaScript
+2. Insert as the last action, this invocation on mouse-up: `runInitialize();`
 
 ![alt text](img/add-javascript.png "Add JavaScript on Mouse Up event")
 
-### BUILD
-As an action, insert this invocation on mouse-up:
-`runBuild();`
-
-### CALCULATE
-As an action, insert this invocation on mouse-up:
-`runCalculate();`
-
-### RESET
-As an action, insert this invocation on mouse-up:
-`runReset();`
-
-## Configuration Control Buttons
+### Configuration Controls
 Each of these display a menu and when an item is selected, populates a field. These will be used with the BUILD command `runBuild`.
 
 Name each control button following the pattern `btn_foo_suffix` where *foo* is the name of the menu name. Name each field following the pattern `text_foo_suffix` where *foo* matches the menu control.
