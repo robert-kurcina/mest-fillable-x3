@@ -1,4 +1,4 @@
-//MEST.data-controls
+//data-controls.js
 
 var SUFFIX_LIST = ["_a", "_b", "_c"];
 var BP_SUBFIELDS = ["fBP", "BP_1", "BP_2", "BP_3", "BP_4", "BP_item_1", "BP_item_2"];

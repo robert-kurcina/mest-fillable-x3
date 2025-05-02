@@ -1,4 +1,4 @@
-//MEST.functions
+//functions-process.js
 
 function calcBPTotal(bpFields, suffix){
    var sum = 0;
@@ -341,13 +341,21 @@ function runBuild(){
    performBuild(BUILD_TARGETS_BY_NAME, SUFFIX_LIST);
 }
 
+function prepareForm(){
+   var btnBuild = this.getField("btn_build") || {};
+   var btnCalculate = this.getField("btn_calculate") || {};
+   var btnReset = this.getField("btn_reset") || {};
+
+   btnBuild.setAction("MouseUp", "runBuild();");
+   btnCalculate.setAction("MouseUp", "runCalculate();");
+   btnReset.setAction("MouseUp", "runReset();");
+}
+
 function runInitialize(){
    showEverything();
    initializeGlobal();
+   prepareForm();
 }
 
-//runInitialize(); invoke at end of INITIALIZE button
-//runBuild(); invoke via BUILD button
-//runCalculate(); invoke via CALCULATE button
-//runReset(); invoke via RESET button
+
 

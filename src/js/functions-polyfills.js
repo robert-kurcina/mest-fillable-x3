@@ -1,4 +1,4 @@
-//MEST.acrojs-polyfills
+//functions-polyfills.js
 
 /**
  * A polyfile for Object.keys(object);
