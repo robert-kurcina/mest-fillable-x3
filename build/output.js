@@ -1,4 +1,5 @@
 //data-archetypes.js
+
 var MASTER_MENU = MASTER_MENU || {};
 
 MASTER_MENU.ARCHETYPES = {
@@ -33,6 +34,7 @@ MASTER_MENU.ARCHETYPES = {
       "traits": []
    }
 }//data-armors.js
+
 var MASTER_MENU = MASTER_MENU || {};
 
 MASTER_MENU.ARMORS = {
@@ -109,6 +111,7 @@ MASTER_MENU.ARMORS = {
       "BP": 15
    }
 }//data-attributes.js
+
 var MASTER_MENU = MASTER_MENU || {};
 
 MASTER_MENU.ATTRIBUTES = {
@@ -273,6 +276,7 @@ var TOGGLE_STATUS = {
 
 var ADJUST_AVERAGE = -57;
 var AVERAGE_ATTR = 2;//data-species.js
+
 var MASTER_MENU = MASTER_MENU || {};
 
 MASTER_MENU.SPECIES = {
@@ -294,7 +298,9 @@ MASTER_MENU.SPECIES = {
       "iCR" : 0.2,
       "traits": ["Leadership"]
    },
-}var MASTER_MENU = MASTER_MENU || {};
+}//data-variants.js
+
+var MASTER_MENU = MASTER_MENU || {};
 
 MASTER_MENU.VARIANTS = {
    "_none": {
@@ -435,6 +441,7 @@ MASTER_MENU.VARIANTS = {
    }
 }
 //data-weapons.js
+
 var MASTER_MENU = MASTER_MENU || {};
 
 MASTER_MENU.WEAPONS = {
@@ -838,8 +845,6 @@ function runInitialize(){
    initializeGlobal();
    prepareForm();
 }//functions-build.js
-
-
 
 function assignConfiguration(menuSetName, suffix){
     if (!menuSetName){ return; }
