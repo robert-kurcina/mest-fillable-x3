@@ -13,6 +13,6 @@
   "license": "MIT",
   "devDependencies": {
     "bump": "^0.2.5",
-    "merge-files": "^0.1.2"
+    "simple-file-concat": "^1.0.6"
   }
 }
