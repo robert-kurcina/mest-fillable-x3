@@ -121,7 +121,8 @@ function resetChecks(fieldSet, suffix){
     }
  }
  
-function performCalculations(suffixes){   
+function performCalculations(suffixes){  
+   console.println("INVOKED performCalculations"); 
     for (var i = 0; i < suffixes.length; i++){
        var suffix = suffixes[i];
  

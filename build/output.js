@@ -847,19 +847,23 @@ MASTER_MENU.WEAPONS = {
 //------------------------------------------------------------------------------------------------------------------------------------------
 
 function runReset(){
+   console.println("INVOKED runReset");
    hideEverything();
    initializeGlobal();
 }
 
 function runCalculate(){
+   console.println("INVOKED runCalculate");
    performCalculations(SUFFIX_LIST);
 }
 
 function runBuild(){
+   console.println("INVOKED runBuild");
    performBuild(BUILD_TARGETS_BY_NAME, SUFFIX_LIST);
 }
 
 function prepareForm(){
+   console.println("INVOKED prepareForm");
    var btnBuild = this.getField("btn_build") || {};
    var btnCalculate = this.getField("btn_calculate") || {};
    var btnReset = this.getField("btn_reset") || {};
@@ -870,6 +874,7 @@ function prepareForm(){
 }
 
 function runInitialize(){
+   console.println("INVOKED runInitialize");
    showEverything();
    initializeGlobal();
    prepareForm();
@@ -1040,7 +1045,8 @@ function resetChecks(fieldSet, suffix){
     }
  }
  
-function performCalculations(suffixes){   
+function performCalculations(suffixes){  
+   console.println("INVOKED performCalculations"); 
     for (var i = 0; i < suffixes.length; i++){
        var suffix = suffixes[i];
  
