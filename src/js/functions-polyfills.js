@@ -1,4 +1,7 @@
+
+
 //functions-polyfills.js
+//------------------------------------------------------------------------------------------------------------------------------------------
 
 /**
  * A polyfile for Object.keys(object);
@@ -43,7 +46,8 @@ if (!Object.keys) {
  * @returns string
  * @see https://gist.github.com/rajatjain-21/02e2c5a30cf9d0190cb5503a25417fd1
  */
-// This implementation does not work with Symbols, BigInts
+//
+//------------------------------------------------------------------------------------------------------------------------------------------ This implementation does not work with Symbols, BigInts
 function stringify(data) {
   if (data === undefined)
     return undefined

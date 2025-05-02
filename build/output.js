@@ -1,4 +1,6 @@
+
 //data-archetypes.js
+//------------------------------------------------------------------------------------------------------------------------------------------
 
 var MASTER_MENU = MASTER_MENU || {};
 
@@ -33,7 +35,10 @@ MASTER_MENU.ARCHETYPES = {
       "iCR" : 0,
       "traits": []
    }
-}//data-armors.js
+}
+
+//data-armors.js
+//------------------------------------------------------------------------------------------------------------------------------------------
 
 var MASTER_MENU = MASTER_MENU || {};
 
@@ -110,7 +115,10 @@ MASTER_MENU.ARMORS = {
       "traits": "[Laden 3][Lumbering]. Deflect.",
       "BP": 15
    }
-}//data-attributes.js
+}
+
+//data-attributes.js
+//------------------------------------------------------------------------------------------------------------------------------------------
 
 var MASTER_MENU = MASTER_MENU || {};
 
@@ -178,7 +186,10 @@ MASTER_MENU.ATTRIBUTES = {
       "condition": "=",
       "index": 8
    }
-}//data-controls.js
+}
+
+//data-controls.js
+//------------------------------------------------------------------------------------------------------------------------------------------
 
 var SUFFIX_LIST = ["_a", "_b", "_c"];
 var BP_SUBFIELDS = ["fBP", "BP_1", "BP_2", "BP_3", "BP_4", "BP_item_1", "BP_item_2"];
@@ -270,12 +281,21 @@ var TOGGLE_STATUS = {
    "noView": 3
 }
 
+
+
 //data-equipment.js
+//------------------------------------------------------------------------------------------------------------------------------------------
+
+
 
 //data-globals
+//------------------------------------------------------------------------------------------------------------------------------------------
 
 var ADJUST_AVERAGE = -57;
-var AVERAGE_ATTR = 2;//data-species.js
+var AVERAGE_ATTR = 2;
+
+//data-species.js
+//------------------------------------------------------------------------------------------------------------------------------------------
 
 var MASTER_MENU = MASTER_MENU || {};
 
@@ -298,7 +318,10 @@ MASTER_MENU.SPECIES = {
       "iCR" : 0.2,
       "traits": ["Leadership"]
    },
-}//data-variants.js
+}
+
+//data-variants.js
+//------------------------------------------------------------------------------------------------------------------------------------------
 
 var MASTER_MENU = MASTER_MENU || {};
 
@@ -440,7 +463,10 @@ MASTER_MENU.VARIANTS = {
       "termPriority": 1800
    }
 }
+
+
 //data-weapons.js
+//------------------------------------------------------------------------------------------------------------------------------------------
 
 var MASTER_MENU = MASTER_MENU || {};
 
@@ -815,7 +841,10 @@ MASTER_MENU.WEAPONS = {
       "traits": ".",
       "BP": 53
    }
-}//functions-prepare.js
+}
+
+//functions-prepare.js
+//------------------------------------------------------------------------------------------------------------------------------------------
 
 function runReset(){
    hideEverything();
@@ -844,7 +873,10 @@ function runInitialize(){
    showEverything();
    initializeGlobal();
    prepareForm();
-}//functions-build.js
+}
+
+//functions-build.js
+//------------------------------------------------------------------------------------------------------------------------------------------
 
 function assignConfiguration(menuSetName, suffix){
     if (!menuSetName){ return; }
@@ -885,7 +917,10 @@ function assignConfiguration(menuSetName, suffix){
  
        assignConfigurations(buildTargetHash, suffix);
     }   
- }//functions-calculate.js
+ }
+
+//functions-calculate.js
+//------------------------------------------------------------------------------------------------------------------------------------------
 
 function getHighest(fieldSet, suffix){
     var highest = -1000;
@@ -1012,7 +1047,10 @@ function performCalculations(suffixes){
        driveBPSum(suffix);
        driveBurden(suffix);
     }          
- }//functions-menu.js
+ }
+
+//functions-menu.js
+//------------------------------------------------------------------------------------------------------------------------------------------
 
 function getMenuName(fooText){
     if (!fooText){ return {}; }
@@ -1067,7 +1105,10 @@ function getMenuName(fooText){
     var choice = app.popUpMenu(menuItems) || defaultValue;
  
     field.value = choice;
- }//functions-polyfills.js
+ }
+
+//functions-polyfills.js
+//------------------------------------------------------------------------------------------------------------------------------------------
 
 /**
  * A polyfile for Object.keys(object);
@@ -1112,7 +1153,8 @@ if (!Object.keys) {
  * @returns string
  * @see https://gist.github.com/rajatjain-21/02e2c5a30cf9d0190cb5503a25417fd1
  */
-// This implementation does not work with Symbols, BigInts
+//
+//------------------------------------------------------------------------------------------------------------------------------------------ This implementation does not work with Symbols, BigInts
 function stringify(data) {
   if (data === undefined)
     return undefined
@@ -1144,7 +1186,10 @@ function stringify(data) {
     }, []).join(',') + '}'
 
     return '{}'
-}//functions-process.js
+}
+
+//functions-process.js
+//------------------------------------------------------------------------------------------------------------------------------------------
 
 /**
  * INVOKED by each Profile Configuration button
