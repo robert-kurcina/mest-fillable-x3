@@ -1,8 +1,107 @@
 
+
+//a-globals
+//------------------------------------------------------------------------------------------------------------------------------------------
+
+_global = {};
+
+ADJUST_AVERAGE = -57;
+AVERAGE_ATTR = 2;
+MASTER_MENU = {};
+GLOBAL_DELIMITER = "_";
+
+
+//a-polyfills.js
+//------------------------------------------------------------------------------------------------------------------------------------------
+
+/**
+ * A polyfile for Object.keys(object);
+ */
+if (!Object.keys) {
+  Object.keys = (function () {
+    var hasOwnProperty = Object.prototype.hasOwnProperty,
+        hasDontEnumBug = !({toString: null}).propertyIsEnumerable('toString'),
+        dontEnums = [
+          'toString',
+          'toLocaleString',
+          'valueOf',
+          'hasOwnProperty',
+          'isPrototypeOf',
+          'propertyIsEnumerable',
+          'constructor'
+        ],
+        dontEnumsLength = dontEnums.length;
+
+    return function (obj) {
+      if (typeof obj !== 'object' && typeof obj !== 'function' || obj === null) throw new TypeError('Object.keys called on non-object');
+
+      var result = [];
+
+      for (var prop in obj) {
+        if (hasOwnProperty.call(obj, prop)) result.push(prop);
+      }
+
+      if (hasDontEnumBug) {
+        for (var i=0; i < dontEnumsLength; i++) {
+          if (hasOwnProperty.call(obj, dontEnums[i])) result.push(dontEnums[i]);
+        }
+      }
+      return result;
+    };
+  })();
+}
+
+/**
+ * A polyfil for stringify(object);
+ * This implementation does not work with Symbols, BigInts
+ * @param {} data 
+ * @returns string
+ * @see https://gist.github.com/rajatjain-21/02e2c5a30cf9d0190cb5503a25417fd1
+ */
+
+
+STRINGIFY_MAX_DEPTH_DEFAULT = 10;
+_global.stringifiedMaxDepth = STRINGIFY_MAX_DEPTH_DEFAULT;
+
+function invokeStringify(data, maxDepth, maxLength){
+  if (maxDepth > 0){ _global.stringifiedMaxDepth = maxDepth; }
+  return stringify(data, 0);
+}
+
+function stringify(data, depth) {
+  if (depth > _global.stringifiedMaxDepth){ return data; }
+
+  if (data === undefined){  return undefined; }
+  if (data === null){ return 'null'; }
+  if (data.toString() === "NaN"){ return 'null'; }
+  if (data === Infinity){ return 'null'; }
+  if (data.constructor === String){ return '"' + data.replace(/"/g, '\\"') + '"'; }
+  if (data.constructor === Number){ return String(data); }
+  if (data.constructor === Boolean){ return data ? 'true' : 'false'; }
+
+  if (data.constructor === Array){
+    return '[' + data.reduce((acc, v) => {
+      if (v === undefined || v === NaN || v === Infinity)
+        return [...acc, 'null']
+      else
+        return [...acc, stringify(v, ++depth)]
+    }, []).join(',') + ']';
+  }
+
+  if (data.constructor === Object){
+    return '{' + Object.keys(data).reduce((acc, k) => {
+      if (data[k] === undefined)
+        return acc
+      else
+        return [...acc, stringify(k, ++depth) + ':' + stringify(data[k], ++depth)]
+    }, []).join(',') + '}';
+  }
+
+    return '{}';
+}
 //data-archetypes.js
 //------------------------------------------------------------------------------------------------------------------------------------------
 
-var MASTER_MENU = MASTER_MENU || {};
 
 MASTER_MENU.ARCHETYPES = {
    "Average": {
@@ -40,7 +139,6 @@ MASTER_MENU.ARCHETYPES = {
 //data-armors.js
 //------------------------------------------------------------------------------------------------------------------------------------------
 
-var MASTER_MENU = MASTER_MENU || {};
 
 MASTER_MENU.ARMORS = {
    "_none": {
@@ -120,7 +218,6 @@ MASTER_MENU.ARMORS = {
 //data-attributes.js
 //------------------------------------------------------------------------------------------------------------------------------------------
 
-var MASTER_MENU = MASTER_MENU || {};
 
 MASTER_MENU.ATTRIBUTES = {
    "CCA": {
@@ -191,12 +288,12 @@ MASTER_MENU.ATTRIBUTES = {
 //data-controls.js
 //------------------------------------------------------------------------------------------------------------------------------------------
 
-var SUFFIX_LIST = ["_a", "_b", "_c"];
+
+var SUFFIX_LIST = ["_a"];
 var BP_SUBFIELDS = ["fBP", "BP_1", "BP_2", "BP_3", "BP_4", "BP_item_1", "BP_item_2"];
 var BURDEN_FIELDS = ["cb_cca", "cb_ref", "cb_mov"];
 var PHYSICALITY_FIELDS = ["STR", "SIZ"];
 var BP_TOTAL_FIELD = "BPTotal";
-var GLOBAL_DELIMITER = "_";
 var PROFILE_KEY = "profile";
 var MENU_NAME_ERROR = "ERROR";
 var MENU_DEFAULT_NONE = "_none";
@@ -288,16 +385,9 @@ var TOGGLE_STATUS = {
 
 
 
-//data-globals
-//------------------------------------------------------------------------------------------------------------------------------------------
-
-var ADJUST_AVERAGE = -57;
-var AVERAGE_ATTR = 2;
-
 //data-species.js
 //------------------------------------------------------------------------------------------------------------------------------------------
 
-var MASTER_MENU = MASTER_MENU || {};
 
 MASTER_MENU.SPECIES = {
    "Ethonik": {
@@ -323,7 +413,6 @@ MASTER_MENU.SPECIES = {
 //data-variants.js
 //------------------------------------------------------------------------------------------------------------------------------------------
 
-var MASTER_MENU = MASTER_MENU || {};
 
 MASTER_MENU.VARIANTS = {
    "_none": {
@@ -468,7 +557,6 @@ MASTER_MENU.VARIANTS = {
 //data-weapons.js
 //------------------------------------------------------------------------------------------------------------------------------------------
 
-var MASTER_MENU = MASTER_MENU || {};
 
 MASTER_MENU.WEAPONS = {
    "_none": {
@@ -885,14 +973,15 @@ function runInitialize(){
 
 function assignConfiguration(menuSetName, suffix){
     if (!menuSetName){ return; }
+    console.println("INVOKED assignConfiguration " + menuSetName + ":" + suffix);
  
     var profileHash = getProfileHash(suffix);
     profileHash[menuSetName] = [];
  
-    var dataSet = MASTER_MENU[menuSetName];
-    var defaulSetName = MENU_DEFAULT_BY_NAME[menuSetName];
-    var textFieldKeys = BUILD_TARGETS_BY_NAME[menuSetName] || [];
-    var numKeys = textFieldKeys.length;
+    var dataSet = MASTER_MENU[menuSetName]; console.println("-- dataSet " + stringify(dataSet));
+    var defaulSetName = MENU_DEFAULT_BY_NAME[menuSetName]; console.println("-- defaulSetName " + defaulSetName);
+    var textFieldKeys = BUILD_TARGETS_BY_NAME[menuSetName] || []; console.println("-- textFieldKeys " + textFieldKeys);
+    var numKeys = textFieldKeys.length; console.println("-- numKeys " + numKeys);
  
     for (var i = 0; i < numKeys; i++){
        var key = textFieldKeys[i] + suffix;
@@ -906,17 +995,21 @@ function assignConfiguration(menuSetName, suffix){
  
  function assignConfigurations(buildTargetHash, suffix){
     if (!buildTargetHash){ return; }
+    console.println("INVOKED assignConfigurations " + suffix);
  
-    var targetKeys = Object.keys(buildTargetHash);
-    for (var j = 0; j < targetKeys; j++){
-       var targetKey = targetKeys[j];
+    var menuSetNames = Object.keys(buildTargetHash);
+    console.println("menuSetName " + stringify(menuSetNames));
+
+    for (var j = 0; j < menuSetNames.length; j++){
+       var menuSetName = menuSetNames[j];
  
-       assignConfiguration(targetKey, suffix);
+       assignConfiguration(menuSetName, suffix);
     }
  }
  
  function performBuild(buildTargetHash, suffixes){
-    console.println("INVOKED performBuild");
+    console.println("INVOKED performBuild \n" + stringify(buildTargetHash));
+
     for (var i = 0; i < suffixes.length; i++){
        var suffix = suffixes[i];
  
@@ -1113,87 +1206,6 @@ function getMenuName(fooText){
     field.value = choice;
  }
 
-//functions-polyfills.js
-//------------------------------------------------------------------------------------------------------------------------------------------
-
-/**
- * A polyfile for Object.keys(object);
- */
-if (!Object.keys) {
-  Object.keys = (function () {
-    var hasOwnProperty = Object.prototype.hasOwnProperty,
-        hasDontEnumBug = !({toString: null}).propertyIsEnumerable('toString'),
-        dontEnums = [
-          'toString',
-          'toLocaleString',
-          'valueOf',
-          'hasOwnProperty',
-          'isPrototypeOf',
-          'propertyIsEnumerable',
-          'constructor'
-        ],
-        dontEnumsLength = dontEnums.length;
-
-    return function (obj) {
-      if (typeof obj !== 'object' && typeof obj !== 'function' || obj === null) throw new TypeError('Object.keys called on non-object');
-
-      var result = [];
-
-      for (var prop in obj) {
-        if (hasOwnProperty.call(obj, prop)) result.push(prop);
-      }
-
-      if (hasDontEnumBug) {
-        for (var i=0; i < dontEnumsLength; i++) {
-          if (hasOwnProperty.call(obj, dontEnums[i])) result.push(dontEnums[i]);
-        }
-      }
-      return result;
-    };
-  })();
-}
-
-/**
- * A polyfil for stringify(object);
- * @param {} data 
- * @returns string
- * @see https://gist.github.com/rajatjain-21/02e2c5a30cf9d0190cb5503a25417fd1
- */
-//
-//------------------------------------------------------------------------------------------------------------------------------------------ This implementation does not work with Symbols, BigInts
-function stringify(data) {
-  if (data === undefined)
-    return undefined
-  if (data === null)
-    return 'null'
-  if (data.toString() === "NaN")
-    return 'null'
-  if (data === Infinity)
-    return 'null'
-  if (data.constructor === String)
-    return '"' + data.replace(/"/g, '\\"') + '"'
-  if (data.constructor === Number)
-    return String(data)
-  if (data.constructor === Boolean)
-    return data ? 'true' : 'false'
-  if (data.constructor === Array)
-    return '[' + data.reduce((acc, v) => {
-      if (v === undefined || v === NaN || v === Infinity)
-        return [...acc, 'null']
-      else
-        return [...acc, stringify(v)]
-    }, []).join(',') + ']'
-  if (data.constructor === Object)
-    return '{' + Object.keys(data).reduce((acc, k) => {
-      if (data[k] === undefined)
-        return acc
-      else
-        return [...acc, stringify(k) + ':' + stringify(data[k])]
-    }, []).join(',') + '}'
-
-    return '{}'
-}
-
 //functions-process.js
 //------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -1242,36 +1254,43 @@ function getTextField(fooText, suffix){
   */
  function toggleVisibility(givenList, toggleState, suffix){
    if (!givenList || !givenList.length){ return; }
+   console.println("INVOKED toggleVisibility " + ":" + toggleState + " for " + (suffix || "all found"));
    
    var state = toggleState || 0;
    for (var i = 0; i < givenList.length; i++){
       var key = givenList[i] + (suffix || "");
       var field = this.getField(key) || {};
 
-      field.display = toggleState;
+      field.display = state;
    }
 }
 
 function toggleSets(toggleState, suffixes){
-   toggleVisibility(BUTTON_LIST, toggleState);
-   toggleVisibility(LABEL_LIST, toggleState);
+   console.println("INVOKED toggleSets " + ":" + toggleState + " for " + stringify(suffixes));
+   console.println(" toggleVisibility -- BUTTON_LIST"); toggleVisibility(BUTTON_LIST, toggleState); 
+   console.println(" toggleVisibility -- LABEL_LIST"); toggleVisibility(LABEL_LIST, toggleState); 
 
    for (var i = 0; i < suffixes.length; i++){
       var suffix = suffixes[i];
-      toggleVisibility(CONTROL_LIST, toggleState, suffix);
-      toggleVisibility(TEXT_LIST, toggleState, suffix);
+      console.println(" toggleVisibility -- CONTROL_LIST"); toggleVisibility(CONTROL_LIST, toggleState, suffix); 
+      console.println(" toggleVisibility -- TEXT_LIST"); toggleVisibility(TEXT_LIST, toggleState, suffix); 
    }
 }
 
 function hideEverything(){
+   console.println("INVOKED hideEverything");
    toggleSets(TOGGLE_STATUS.hidden, SUFFIX_LIST);
+   toggleVisibility(["btn_initialize"], TOGGLE_STATUS.noPrint);
 }
 
 function showEverything(){
+   console.println("INVOKED showEverything");
    toggleSets(TOGGLE_STATUS.noPrint, SUFFIX_LIST);
+   toggleVisibility(["btn_initialize"], TOGGLE_STATUS.hidden);
 }
 
 function initializeGlobal(){
+   console.println("INVOKED initializeGlobal");
    _global = {};
 }
 
@@ -1281,6 +1300,8 @@ function getProfileKey(suffix){
 }
 
 function getProfileHash(suffix){
+   console.println("INVOKED getProfileHash " + suffix);
+
    var profileKey = getProfileKey(suffix);
    var profileHash = _global[profileKey];
 
@@ -1293,6 +1314,7 @@ function getProfileHash(suffix){
 
 function initializeProfile(suffix){
    var profileKey = getProfileKey(suffix);
+   console.println("INVOKED initializeProfile " + ":" + profileKey + " for " + suffix);
 
    _global[profileKey] = {
       "attrList": [2,2,2,2,2,2,2,2,3],
@@ -1300,7 +1322,7 @@ function initializeProfile(suffix){
       "iCRrList": []
    };
 
-   var pHash = _global[profileId];
+   var pHash = _global[profileKey];
    return pHash;
 }
 

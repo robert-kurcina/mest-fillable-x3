@@ -48,36 +48,43 @@ function getTextField(fooText, suffix){
   */
  function toggleVisibility(givenList, toggleState, suffix){
    if (!givenList || !givenList.length){ return; }
+   console.println("INVOKED toggleVisibility " + ":" + toggleState + " for " + (suffix || "all found"));
    
    var state = toggleState || 0;
    for (var i = 0; i < givenList.length; i++){
       var key = givenList[i] + (suffix || "");
       var field = this.getField(key) || {};
 
-      field.display = toggleState;
+      field.display = state;
    }
 }
 
 function toggleSets(toggleState, suffixes){
-   toggleVisibility(BUTTON_LIST, toggleState);
-   toggleVisibility(LABEL_LIST, toggleState);
+   console.println("INVOKED toggleSets " + ":" + toggleState + " for " + stringify(suffixes));
+   console.println(" toggleVisibility -- BUTTON_LIST"); toggleVisibility(BUTTON_LIST, toggleState); 
+   console.println(" toggleVisibility -- LABEL_LIST"); toggleVisibility(LABEL_LIST, toggleState); 
 
    for (var i = 0; i < suffixes.length; i++){
       var suffix = suffixes[i];
-      toggleVisibility(CONTROL_LIST, toggleState, suffix);
-      toggleVisibility(TEXT_LIST, toggleState, suffix);
+      console.println(" toggleVisibility -- CONTROL_LIST"); toggleVisibility(CONTROL_LIST, toggleState, suffix); 
+      console.println(" toggleVisibility -- TEXT_LIST"); toggleVisibility(TEXT_LIST, toggleState, suffix); 
    }
 }
 
 function hideEverything(){
+   console.println("INVOKED hideEverything");
    toggleSets(TOGGLE_STATUS.hidden, SUFFIX_LIST);
+   toggleVisibility(["btn_initialize"], TOGGLE_STATUS.noPrint);
 }
 
 function showEverything(){
+   console.println("INVOKED showEverything");
    toggleSets(TOGGLE_STATUS.noPrint, SUFFIX_LIST);
+   toggleVisibility(["btn_initialize"], TOGGLE_STATUS.hidden);
 }
 
 function initializeGlobal(){
+   console.println("INVOKED initializeGlobal");
    _global = {};
 }
 
@@ -87,6 +94,8 @@ function getProfileKey(suffix){
 }
 
 function getProfileHash(suffix){
+   console.println("INVOKED getProfileHash " + suffix);
+
    var profileKey = getProfileKey(suffix);
    var profileHash = _global[profileKey];
 
@@ -99,6 +108,7 @@ function getProfileHash(suffix){
 
 function initializeProfile(suffix){
    var profileKey = getProfileKey(suffix);
+   console.println("INVOKED initializeProfile " + ":" + profileKey + " for " + suffix);
 
    _global[profileKey] = {
       "attrList": [2,2,2,2,2,2,2,2,3],
@@ -106,7 +116,7 @@ function initializeProfile(suffix){
       "iCRrList": []
    };
 
-   var pHash = _global[profileId];
+   var pHash = _global[profileKey];
    return pHash;
 }
 

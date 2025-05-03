@@ -1,7 +1,11 @@
 
 
-//data-globals
+//a-globals
 //------------------------------------------------------------------------------------------------------------------------------------------
 
-var ADJUST_AVERAGE = -57;
-var AVERAGE_ATTR = 2;
+_global = {};
+
+ADJUST_AVERAGE = -57;
+AVERAGE_ATTR = 2;
+MASTER_MENU = {};
+GLOBAL_DELIMITER = "_";

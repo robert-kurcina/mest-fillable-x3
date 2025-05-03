@@ -5,14 +5,15 @@
 
 function assignConfiguration(menuSetName, suffix){
     if (!menuSetName){ return; }
+    console.println("INVOKED assignConfiguration " + menuSetName + ":" + suffix);
  
     var profileHash = getProfileHash(suffix);
     profileHash[menuSetName] = [];
  
-    var dataSet = MASTER_MENU[menuSetName];
-    var defaulSetName = MENU_DEFAULT_BY_NAME[menuSetName];
-    var textFieldKeys = BUILD_TARGETS_BY_NAME[menuSetName] || [];
-    var numKeys = textFieldKeys.length;
+    var dataSet = MASTER_MENU[menuSetName]; console.println("-- dataSet " + stringify(dataSet));
+    var defaulSetName = MENU_DEFAULT_BY_NAME[menuSetName]; console.println("-- defaulSetName " + defaulSetName);
+    var textFieldKeys = BUILD_TARGETS_BY_NAME[menuSetName] || []; console.println("-- textFieldKeys " + textFieldKeys);
+    var numKeys = textFieldKeys.length; console.println("-- numKeys " + numKeys);
  
     for (var i = 0; i < numKeys; i++){
        var key = textFieldKeys[i] + suffix;
@@ -26,17 +27,21 @@ function assignConfiguration(menuSetName, suffix){
  
  function assignConfigurations(buildTargetHash, suffix){
     if (!buildTargetHash){ return; }
+    console.println("INVOKED assignConfigurations " + suffix);
  
-    var targetKeys = Object.keys(buildTargetHash);
-    for (var j = 0; j < targetKeys; j++){
-       var targetKey = targetKeys[j];
+    var menuSetNames = Object.keys(buildTargetHash);
+    console.println("menuSetName " + stringify(menuSetNames));
+
+    for (var j = 0; j < menuSetNames.length; j++){
+       var menuSetName = menuSetNames[j];
  
-       assignConfiguration(targetKey, suffix);
+       assignConfiguration(menuSetName, suffix);
     }
  }
  
  function performBuild(buildTargetHash, suffixes){
-    console.println("INVOKED performBuild");
+    console.println("INVOKED performBuild \n" + stringify(buildTargetHash));
+
     for (var i = 0; i < suffixes.length; i++){
        var suffix = suffixes[i];
  

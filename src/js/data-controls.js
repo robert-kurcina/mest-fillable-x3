@@ -3,12 +3,12 @@
 //data-controls.js
 //------------------------------------------------------------------------------------------------------------------------------------------
 
-var SUFFIX_LIST = ["_a", "_b", "_c"];
+
+var SUFFIX_LIST = ["_a"];
 var BP_SUBFIELDS = ["fBP", "BP_1", "BP_2", "BP_3", "BP_4", "BP_item_1", "BP_item_2"];
 var BURDEN_FIELDS = ["cb_cca", "cb_ref", "cb_mov"];
 var PHYSICALITY_FIELDS = ["STR", "SIZ"];
 var BP_TOTAL_FIELD = "BPTotal";
-var GLOBAL_DELIMITER = "_";
 var PROFILE_KEY = "profile";
 var MENU_NAME_ERROR = "ERROR";
 var MENU_DEFAULT_NONE = "_none";
