@@ -1,5 +1,5 @@
 # MEST.fillable
-This code drives the interactive features of `8.5x11.character.template-fillable-x3`
+This code drives the interactive features of `pdf/MEST.crs-dynamic.pdf`
 
 1. All code is written in separate files within //src/js
 2. Ensure every file has a blank-line before any non-comments otherwise they'll be joined incorrectly.
