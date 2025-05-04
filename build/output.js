@@ -303,7 +303,7 @@ var MENU_REFERENCES_BY_FOO = {
    "weapon": "WEAPONS",
    "armor": "ARMORS",
    "species": "SPECIES"
-}
+};
 
 var MENU_DEFAULT_BY_NAME = {
    "ARCHETYPES": "Average",
@@ -311,7 +311,7 @@ var MENU_DEFAULT_BY_NAME = {
    "WEAPONS": MENU_DEFAULT_NONE,
    "ARMORS": MENU_DEFAULT_NONE,
    "SPECIES": "Human"
-}
+};
 
 var BUILD_TARGETS_BY_NAME = {
    "ARCHETYPES": ["text_archetype"],
@@ -319,7 +319,8 @@ var BUILD_TARGETS_BY_NAME = {
    "WEAPONS": ["text_weapon_1", "text_weapon_2", "text_weapon_3", "text_weapon_4"],
    "ARMORS": ["text_armor_1", "text_armor_2", "text_armor_3", "text_armor_4"],
    "SPECIES": ["text_species"]
-}
+};
+
 
 var TRAITS_FIELDS = [
     "Traits",
@@ -330,6 +331,39 @@ var TRAITS_FIELDS = [
     "item_traits_1",
     "item_traits_2"
 ];
+
+var OUTPUT_FIELDS = {
+   "attributes": {
+      "CCA": "CCA",
+      "RCA": "RCA",
+      "REF": "REF",
+      "INT": "INT",
+      "POW": "POW",
+      "STR": "STR",
+      "FOR": "FOR",
+      "MOV": "MOV",
+      "SIZ": "SIZ"
+   },
+   "character_traits": "Traits",
+   "weapon_stats": {
+      "Class": "__IGNORE__",
+      "label": "Weapon",
+      "OR": "OR",
+      "Acc": "ACC",
+      "Impact": "Impact",
+      "Dmg": "Dmg",
+      "traits": "weapon_traits",
+      "BP": "BP"
+   },
+   "armor_stats": {
+      "label": "Item",
+      "Type": "__IGNORE__",
+      "AR": "__SUM__",
+      "Deflect": "__SUM__",
+      "traits": "item_traits",
+      "BP": "BP_item"
+   }
+};
 
 var LABEL_LIST = [
    "info_configuration"
@@ -356,7 +390,7 @@ var CONTROL_LIST = [
    "btn_species"
 ];
 
-var TEXT_LIST = [
+var INPUT_TEXT_LIST = [
   "text_archetype",
   "text_variant_1",
   "text_variant_2",
@@ -376,8 +410,7 @@ var TOGGLE_STATUS = {
    "hidden": 1,
    "noPrint": 2,
    "noView": 3
-}
-
+};
 
 
 //data-equipment.js
@@ -970,6 +1003,10 @@ function runInitialize(){
 
 //functions-build.js
 //------------------------------------------------------------------------------------------------------------------------------------------
+function updateAttributes(){
+   
+}
+
 
 function assignConfiguration(menuSetName, suffix){
     if (!menuSetName){ return; }
@@ -978,7 +1015,7 @@ function assignConfiguration(menuSetName, suffix){
     var profileHash = getProfileHash(suffix);
     profileHash[menuSetName] = [];
  
-    var dataSet = MASTER_MENU[menuSetName]; console.println("-- dataSet " + stringify(dataSet));
+    var dataSet = MASTER_MENU[menuSetName]; //console.println("-- dataSet " + stringify(dataSet));
     var defaulSetName = MENU_DEFAULT_BY_NAME[menuSetName]; console.println("-- defaulSetName " + defaulSetName);
     var textFieldKeys = BUILD_TARGETS_BY_NAME[menuSetName] || []; console.println("-- textFieldKeys " + textFieldKeys);
     var numKeys = textFieldKeys.length; console.println("-- numKeys " + numKeys);
@@ -991,6 +1028,8 @@ function assignConfiguration(menuSetName, suffix){
        config[menuSetName] = config;
        profileHash[menuSetName].push(config);
     }
+
+   //  console.println("-- profileHash[" + menuSetName + "] is\n" + invokeStringify(profileHash[menuSetName], 8) + "\n");
  }
  
  function assignConfigurations(buildTargetHash, suffix){
@@ -1273,20 +1312,18 @@ function toggleSets(toggleState, suffixes){
    for (var i = 0; i < suffixes.length; i++){
       var suffix = suffixes[i];
       console.println(" toggleVisibility -- CONTROL_LIST"); toggleVisibility(CONTROL_LIST, toggleState, suffix); 
-      console.println(" toggleVisibility -- TEXT_LIST"); toggleVisibility(TEXT_LIST, toggleState, suffix); 
+      console.println(" toggleVisibility -- INPUT_TEXT_LIST"); toggleVisibility(INPUT_TEXT_LIST, toggleState, suffix); 
    }
 }
 
 function hideEverything(){
    console.println("INVOKED hideEverything");
    toggleSets(TOGGLE_STATUS.hidden, SUFFIX_LIST);
-   toggleVisibility(["btn_initialize"], TOGGLE_STATUS.noPrint);
 }
 
 function showEverything(){
    console.println("INVOKED showEverything");
    toggleSets(TOGGLE_STATUS.noPrint, SUFFIX_LIST);
-   toggleVisibility(["btn_initialize"], TOGGLE_STATUS.hidden);
 }
 
 function initializeGlobal(){

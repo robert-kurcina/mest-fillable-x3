@@ -67,20 +67,18 @@ function toggleSets(toggleState, suffixes){
    for (var i = 0; i < suffixes.length; i++){
       var suffix = suffixes[i];
       console.println(" toggleVisibility -- CONTROL_LIST"); toggleVisibility(CONTROL_LIST, toggleState, suffix); 
-      console.println(" toggleVisibility -- TEXT_LIST"); toggleVisibility(TEXT_LIST, toggleState, suffix); 
+      console.println(" toggleVisibility -- INPUT_TEXT_LIST"); toggleVisibility(INPUT_TEXT_LIST, toggleState, suffix); 
    }
 }
 
 function hideEverything(){
    console.println("INVOKED hideEverything");
    toggleSets(TOGGLE_STATUS.hidden, SUFFIX_LIST);
-   toggleVisibility(["btn_initialize"], TOGGLE_STATUS.noPrint);
 }
 
 function showEverything(){
    console.println("INVOKED showEverything");
    toggleSets(TOGGLE_STATUS.noPrint, SUFFIX_LIST);
-   toggleVisibility(["btn_initialize"], TOGGLE_STATUS.hidden);
 }
 
 function initializeGlobal(){
